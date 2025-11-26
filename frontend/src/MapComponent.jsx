@@ -7,11 +7,14 @@ import ZoomControls from './components/ZoomControls';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
+const MAP_WIDTH = 800;
+const MAP_HEIGHT = 600;
+
 const MapComponent = () => {
     const [tooltipContent, setTooltipContent] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [position, setPosition] = useState({ coordinates: [0, 44], zoom: 1 });
+    const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
     const [isDragging, setIsDragging] = useState(false);
 
     const handleZoomIn = () => {
@@ -88,11 +91,11 @@ const MapComponent = () => {
                 projection="geoMercator"
                 projectionConfig={{
                     scale: 160,
-                    center: [0, 44],
                     rotate: [-11, 0, 0]
                 }}
-                width={800}
-                height={600}
+                width={MAP_WIDTH}
+                height={MAP_HEIGHT}
+                viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
                 style={{ width: "100%", height: "100%" }}
             >
                 <ZoomableGroup
@@ -101,7 +104,7 @@ const MapComponent = () => {
                     onMove={handleMove}
                     onMoveStart={() => setIsDragging(true)}
                     onMoveEnd={() => setIsDragging(false)}
-                    translateExtent={[[0, 0], [800, 600]]}
+                    translateExtent={[[0, 0], [MAP_WIDTH, MAP_HEIGHT]]}
                     disablePanning={position.zoom === 1}
                 >
                     <Geographies geography={geoUrl}>
