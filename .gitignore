@@ -1,0 +1,12 @@
+# Dependencias
+**/node_modules/
+**/venv/
+
+# Python Cache y Compilados
+**/__pycache__/
+**/*.pyc
+
+# Builds y Entornos
+**/dist/
+**/.env
+.DS_Store
